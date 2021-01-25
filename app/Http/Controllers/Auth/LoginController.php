@@ -44,16 +44,15 @@ class LoginController extends Controller
                 if (!$appellido) {
                     $user = User::create([
                         'name' => $user_google->user['given_name'],
-                        'last_name' => $appellido,
-                        'email' => $user_google->getEmail()
-                    ]);
-                    
-                } else {
-                    $user = User::create([
-                        'name' => $user_google->user['given_name'],
                         'last_name' => NULL,
                         'email' => $user_google->getEmail()
                     ]);   
+                } else {
+                    $user = User::create([
+                        'name' => $user_google->user['given_name'],
+                        'last_name' => $user_google->user['family_name'],
+                        'email' => $user_google->getEmail()
+                    ]);
                 }
             }
             SocialProfile::create([
