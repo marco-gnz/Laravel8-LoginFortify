@@ -65,6 +65,15 @@
                             </div>
                         </div>
                     </form>
+                    <div class="my-4 form-group row mb-0">
+                        <div class="col-md-8 offset-md-4">
+                            <a href="{{url('/auth/google')}}">
+                                <button type="submit" class="btn btn-primary">
+                                    Continuar con Google
+                                </button>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
