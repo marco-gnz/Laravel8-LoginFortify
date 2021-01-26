@@ -62,7 +62,7 @@ class LoginController extends Controller
                 'social_avatar' => $user_google->getAvatar()
             ]);
         }
-        auth()->login($user);
+        auth()->login($social_profile->user);
 
         return redirect()->route('home');
     }
