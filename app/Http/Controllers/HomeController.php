@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if ($user->rut == null && $user->rut_digit == null) {
+        if ($user->rut == null) {
             return view('home', compact('user'));
         } else {
             return view('home_principal');
@@ -39,11 +39,17 @@ class HomeController extends Controller
         $user = Auth::user();
 
         $rut = $request->rut;
-        $digito = $request->digito;
 
-        $user->update([
-            'rut' => $rut,
-            'rut_digit' => $digito
-        ]);
+        $validation = User::where('rut', $rut)->first();
+
+        if(!$validation){
+            $user->update([
+                'rut' => $rut
+            ]);
+        }else{
+            return response()->json(["ok" => false]);
+        }
+
+        
     }
 }

@@ -57,14 +57,17 @@
                         @endif
                         @else
                         <li class="nav-item dropdown">
-                           
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle navbar-brand" href="#" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-                                <img class="rounded-circle rounded-sm" style="width:30px; height:30px;"
-                                    src="{{ url(Auth::user()->socialProfiles->first()->social_avatar)}}" alt="">
-                            
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle navbar-brand" href="#" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
+                            @if(isset(Auth::user()->socialProfiles->first()->social_avatar) > 0)
+                            <img class="rounded-circle rounded-sm" style="width:30px; height:30px;"
+                                src="{{ url(Auth::user()->socialProfiles->first()->social_avatar)}}" alt="">
+                            @else
+                            <img class="rounded-circle rounded-sm" style="width:30px; height:30px;" src="/img/user.png">
+                            @endif
+
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
