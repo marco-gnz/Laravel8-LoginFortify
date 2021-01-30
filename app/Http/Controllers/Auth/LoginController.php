@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
-use App\Models\SocialProfile;
 use Mockery\Undefined;
+use Illuminate\Http\Request;
+use App\Models\SocialProfile;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -46,7 +47,7 @@ class LoginController extends Controller
                         'name' => $user_google->user['given_name'],
                         'last_name' => NULL,
                         'email' => $user_google->getEmail()
-                    ]);   
+                    ]);
                 } else {
                     $user = User::create([
                         'name' => $user_google->user['given_name'],
@@ -61,9 +62,11 @@ class LoginController extends Controller
                 'social_name' => $driver,
                 'social_avatar' => $user_google->getAvatar()
             ]);
+            Auth::login($user);
+            return redirect()->route('home');
+        } else {
+            Auth::login($social_profile->user);
+            return redirect()->route('home');
         }
-        auth()->login($social_profile->user);
-
-        return redirect()->route('home');
     }
 }
