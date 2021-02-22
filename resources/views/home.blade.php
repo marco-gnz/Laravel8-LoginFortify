@@ -17,6 +17,7 @@
                     Gracias {{$user->name}} {{$user->last_name}} por confirmar tu email. <br>
                     Ahora como ultimo paso necesitamos que ingreses tu RUT, para una mayor seguridad en nuestro sitio.
                     <br>
+                    Nuevo push
                     <i>(Solo con fines de administrar de mejor forma nuestros datos)</i>
                 </div>
                 <div class="card-body">
